@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.charlezz.rxvalidation.MainViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:text="@={viewModel.name}"
+            android:hint="Your name"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:text="@={viewModel.email}"
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:text="@={viewModel.phone}"
+            android:digits="0123456789-"
+            android:inputType="phone"
+            android:maxLength="13"
+            android:hint="010-XXXX-XXXX"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:text="가입하기"
+            android:onClick="@{v->viewModel.showToast()}"
+            android:enabled="@{viewModel.btnEnabled}"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+</layout>
