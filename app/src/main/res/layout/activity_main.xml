@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:enabled="@{viewModel.btnEnabled}"
             android:onClick="@{v->viewModel.showToast()}"
-            android:text="가입하기" />
+            android:text="Sign up" />
 
 
     </LinearLayout>

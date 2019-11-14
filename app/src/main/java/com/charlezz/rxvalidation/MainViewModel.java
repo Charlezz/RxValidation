@@ -121,6 +121,6 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void showToast(){
-        Toast.makeText(getApplication(), "가입성공!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplication(), "Success!",Toast.LENGTH_SHORT).show();
     }
 }
