@@ -2,6 +2,8 @@
 <layout>
 
     <data>
+
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.charlezz.rxvalidation.MainViewModel" />
@@ -14,34 +16,77 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:text="@={viewModel.name}"
-            android:hint="Your name"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:text="@={viewModel.email}"
-            android:inputType="textEmailAddress"
-            android:hint="Email"
-            android:layout_height="wrap_content" />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Your name"
+                android:text="@={viewModel.name}" />
 
-        <EditText
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_done_black_18dp"
+                android:visibility="@{viewModel.nameValid? View.VISIBLE: View.GONE}"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:text="@={viewModel.phone}"
-            android:digits="0123456789-"
-            android:inputType="phone"
-            android:maxLength="13"
-            android:hint="010-XXXX-XXXX"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_done_black_18dp"
+                android:visibility="@{viewModel.emailValid? View.VISIBLE: View.GONE}"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:digits="0123456789-"
+                android:hint="010-XXXX-XXXX"
+                android:inputType="phone"
+                android:maxLength="13"
+                android:text="@={viewModel.phone}" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_done_black_18dp"
+                android:visibility="@{viewModel.phoneValid? View.VISIBLE: View.GONE}"
+                />
+        </LinearLayout>
+
         <Button
             android:id="@+id/btn"
             android:layout_width="match_parent"
-            android:text="가입하기"
-            android:onClick="@{v->viewModel.showToast()}"
+            android:layout_height="wrap_content"
             android:enabled="@{viewModel.btnEnabled}"
-            android:layout_height="wrap_content"/>
+            android:onClick="@{v->viewModel.showToast()}"
+            android:text="가입하기" />
 
 
     </LinearLayout>

@@ -22,14 +22,16 @@ public class MainViewModel extends AndroidViewModel {
     private final BehaviorSubject<String> email = BehaviorSubject.createDefault("android@charlezz.com");
     private final BehaviorSubject<String> phone = BehaviorSubject.createDefault("010-1234-5678");
 
-    private final MutableLiveData<Boolean> btnEnabled = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> nameValid = new InitMutableLiveData<>(false);
+    private final MutableLiveData<Boolean> emailValid = new InitMutableLiveData<>(false);
+    private final MutableLiveData<Boolean> phoneValid = new InitMutableLiveData<>(false);
+    private final MutableLiveData<Boolean> btnEnabled = new InitMutableLiveData<>(false);
 
     private final CompositeDisposable disposables = new CompositeDisposable();
 
 
     public MainViewModel(Application application) {
         super(application);
-        btnEnabled.setValue(false);
         disposables.add(
                 Observable.combineLatest(
                         getNameValidator(),
@@ -40,6 +42,10 @@ public class MainViewModel extends AndroidViewModel {
                     Log.e(TAG,"final result = "+result);
                     btnEnabled.postValue(result);
                 }));
+
+        disposables.add(getNameValidator().subscribe(nameValid::postValue));
+        disposables.add(getEmailValidator().subscribe(emailValid::postValue));
+        disposables.add(getPhoneValidator().subscribe(phoneValid::postValue));
     }
 
     public String getName() {
@@ -96,6 +102,18 @@ public class MainViewModel extends AndroidViewModel {
             Log.e(TAG,"email = "+result);
             return result;
         });
+    }
+
+    public MutableLiveData<Boolean> getNameValid() {
+        return nameValid;
+    }
+
+    public MutableLiveData<Boolean> getEmailValid() {
+        return emailValid;
+    }
+
+    public MutableLiveData<Boolean> getPhoneValid() {
+        return phoneValid;
     }
 
     public LiveData<Boolean> getBtnEnabled() {
